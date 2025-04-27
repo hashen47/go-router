@@ -224,7 +224,7 @@ func TestGetServeMux(t *testing.T) {
 			responses: []Response{
 				{
 					pattern:     "/v1/one",
-					data:        "m2m1/v1/one",
+					data:        "m1m2/v1/one",
 					rtype:       GET,
 					isHeaderSet: false,
 					statusCode:  http.StatusInternalServerError,
@@ -235,7 +235,7 @@ func TestGetServeMux(t *testing.T) {
 				},
 				{
 					pattern:     "/v1/two/three",
-					data:        "m4m3m2m1/v1/two/three",
+					data:        "m1m2m3m4/v1/two/three",
 					rtype:       GET,
 					isHeaderSet: false,
 					statusCode:  http.StatusPartialContent,
@@ -248,7 +248,7 @@ func TestGetServeMux(t *testing.T) {
 				},
 				{
 					pattern:     "/v1/two/four/five",
-					data:        "m3m2m1/v1/two/four/five",
+					data:        "m1m2m3/v1/two/four/five",
 					rtype:       GET,
 					isHeaderSet: false,
 					statusCode:  http.StatusBadRequest,
@@ -318,7 +318,7 @@ func TestGetServeMux(t *testing.T) {
 			responses: []Response{
 				{
 					pattern:     "/one",
-					data:        "m3m2m1/one",
+					data:        "m1m2m3/one",
 					rtype:       POST,
 					isHeaderSet: false,
 					statusCode:  http.StatusCreated,
@@ -331,7 +331,7 @@ func TestGetServeMux(t *testing.T) {
 				},
 				{
 					pattern:     "/two/three",
-					data:        "m5m4m1/two/three",
+					data:        "m1m4m5/two/three",
 					rtype:       DELETE,
 					isHeaderSet: false,
 					statusCode:  http.StatusOK,

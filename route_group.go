@@ -123,7 +123,10 @@ func (g *RouteGroup) AddRouteGroup(rg *RouteGroup) {
 }
 
 func (g *RouteGroup) AddMiddlewaresToGroup(middlewares ...Middleware) {
-	g.middlewares = append(g.middlewares, middlewares...)
+	newMiddlewares := make([]Middleware, 0)
+	newMiddlewares = append(newMiddlewares, middlewares...)
+	newMiddlewares = append(newMiddlewares, g.middlewares...)
+	g.middlewares = newMiddlewares
 }
 
 func (g *RouteGroup) applyMiddlewares() error {
