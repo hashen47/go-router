@@ -1,6 +1,7 @@
 package grouter
 
 import (
+	"fmt"
 	"net/http"
 	"strings"
 )
@@ -78,6 +79,7 @@ func (r *Router) getServeMux() (http.Handler, error) {
 	server := http.NewServeMux()
 
 	for _, route := range r.routes {
+		route.AddMiddlewares(loggingMiddleware)
 		middlewareStack := createMiddlewareStack(route.middlewares...)
 		server.Handle(route.pattern, middlewareStack(http.HandlerFunc(route.handler)))
 	}
@@ -90,5 +92,6 @@ func (r *Router) ListenAndServe() {
 	if err != nil {
 		printAndExit(err, 1)
 	}
+	fmt.Printf("server is listening in port: %s\n", r.addr)
 	printAndExit(http.ListenAndServe(r.addr, handler), 1)
 }
